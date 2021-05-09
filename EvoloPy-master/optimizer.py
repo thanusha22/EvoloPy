@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Tue May 17 15:50:25 2016
-
 @author: hossam
 """
 from pathlib import Path
@@ -18,7 +17,7 @@ import optimizers.GA as ga
 import optimizers.HHO as hho
 import optimizers.SCA as sca
 import optimizers.JAYA as jaya
-import optimizers.DE as de
+import optimizers.WOABAT as woabat
 import benchmarks
 import csv
 import numpy
@@ -63,8 +62,8 @@ def selector(algo, func_details, popSize, Iter):
         x = sca.SCA(getattr(benchmarks, function_name), lb, ub, dim, popSize, Iter)
     elif algo == "JAYA":
         x = jaya.JAYA(getattr(benchmarks, function_name), lb, ub, dim, popSize, Iter)
-    elif algo == "DE":
-        x = de.DE(getattr(benchmarks, function_name), lb, ub, dim, popSize, Iter)
+    elif algo == "WOABAT":
+        x = woabat.WOABAT(getattr(benchmarks, function_name), lb, ub, dim, popSize, Iter)
     else:
         return null
     return x
@@ -74,7 +73,6 @@ def run(optimizer, objectivefunc, NumOfRuns, params, export_flags):
 
     """
     It serves as the main interface of the framework for running the experiments.
-
     Parameters
     ----------
     optimizer : list
@@ -93,7 +91,6 @@ def run(optimizer, objectivefunc, NumOfRuns, params, export_flags):
         2. Export_details (Exporting the detailed results in files)
         3. Export_convergence (Exporting the covergence plots)
         4. Export_boxplot (Exporting the box plots)
-
     Returns
     -----------
     N/A
