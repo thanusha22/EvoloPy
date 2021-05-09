@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon May 16 14:19:49 2016
-
 @author: hossam
 """
 import random
@@ -130,3 +129,4 @@ def WOA(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     s.bestIndividual = Leader_pos
 
     return s
+© 2021 GitHub, Inc.
