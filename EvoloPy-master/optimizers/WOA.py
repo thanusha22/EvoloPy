@@ -129,4 +129,4 @@ def WOA(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     s.bestIndividual = Leader_pos
 
     return s
-© 2021 GitHub, Inc.
+
