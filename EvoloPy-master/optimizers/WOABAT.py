@@ -70,6 +70,7 @@ def WOABAT(objf, lb, ub, dim, SearchAgents_no, Max_iter):
     
     for i in range(0, SearchAgents_no):
         fitness[i] = objf(Positions[i, :])
+
     
     t = 0  # Loop counter
 
@@ -117,7 +118,7 @@ def WOABAT(objf, lb, ub, dim, SearchAgents_no, Max_iter):
             for j in range(0, dim):
 
                 if p < 0.5:
-                    if abs(A) >= 1 or abs(A) < 1:
+                    if abs(A) >= 1:
                         rand_leader_index = math.floor(
                             SearchAgents_no * random.random()
                         )
@@ -129,38 +130,35 @@ def WOABAT(objf, lb, ub, dim, SearchAgents_no, Max_iter):
                        
                         if random.random() > r:
                             z[i,:] = Leader_pos[j] + 0.001 * numpy.random.randn(dim)
-                        
-                         # Evaluate new solutions
-                        Fnew = objf(z[i, :])
-
-                        # Update if the solution improves
-                        if (Fnew <= fitness[i]) and (random.random() < A1):
-                            Positions[i, :] = numpy.copy(z[i, :])
-                            fitness[i] = Fnew
+                           
+                            # Evaluate new solutions
+                            Fnew = objf(z[i, :])
+                            
+                            # Update if the solution improves
+                            if (Fnew <= fitness) and (random.random() < A1):
+                                Positions[i, :] = numpy.copy(z[i, :])
+                                fitness = Fnew
                         
                         
                        
                 
                         #D_X_rand = abs(C * X_rand[j] - Positions[i, j])
                         #Positions[i, j] = X_rand[j] - A * D_X_rand
-                    '''
+                    
                     elif abs(A) < 1:
-                        rand_leader_index = math.floor(
-                            SearchAgents_no * random.random()
-                        )
-                        X_rand = Positions[rand_leader_index, :]
                         Q[i] = Qmin + (Qmin-Qmax) * random.random()
-                        v[i,:] = v[i,j]+(X_rand(j)-Leader_pos[j])*Q[i]
-                        z[i,:] = Positions[i:] + v[i,:]
+                        v[i,:] = v[i,j]+(Positions[i,:]-Leader_pos[j])*Q[i]
+                        z[i,:] = Positions[i,:] + v[i,:]
                         if random.random() > r:
                             z[i,:] = Leader_pos[j] + 0.001 * numpy.random.randn(dim)
                         
-                         # Evaluate new solutions
+                        # Evaluate new solutions
                         Fnew = objf(z[i, :])
-                         # Update if the solution improves
-                        if (Fnew <= fitness[i]) and (random.random() < A1):
+                        
+                        # Update if the solution improves
+                        if (Fnew <= fitness) and (random.random() < A1):
                             Positions[i, :] = numpy.copy(z[i, :])
-                            fitness[i] = Fnew
+                            fitness = Fnew
                         
                         
                         
